@@ -1,2 +1,2 @@
 FROM alpine
-RUN sleep 360s
+RUN sleep 10s
