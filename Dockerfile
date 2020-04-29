@@ -1,16 +1,6 @@
 FROM registry.cn-beijing.aliyuncs.com/comall/backend:base as builder
 
-FROM python:3.6
-
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free" >/etc/apt/sources.list && \
- echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free" >>/etc/apt/sources.list && \
- echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free" >>/etc/apt/sources.list && \
- echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free" >>/etc/apt/sources.list
-
-# init
-RUN apt-get update && \
-    apt-get install -y nginx git && \
-    mkdir /run/nginx/
+FROM registry.cn-beijing.aliyuncs.com/comall/backend:pipeline-base	
 
 #  front file
 COPY --from=builder /store/static.tar.gz /app/html/
