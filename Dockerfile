@@ -4,3 +4,6 @@ RUN apt-get update && \
     mkdir /run/nginx/
 RUN cd /app/pipeline/ && \
     pip3 install -r requirements.txt
+WORKDIR /app
+
+CMD ["/entrypoint.sh"]
