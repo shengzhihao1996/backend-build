@@ -23,7 +23,7 @@ RUN cd /app/html/ && tar xf static.tar.gz && rm -f static.tar.gz && \
     cd /app/pipeline && tar xf python.tar.gz && rm -f python.tar.gz 
     
 RUN cd /app/pipeline/ && \
-    pip3 install -r requirements.txt && \
+    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt && \
     chmod +x /entrypoint.sh
     
 WORKDIR /app
