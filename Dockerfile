@@ -1,4 +1,4 @@
-FROM registry.cn-beijing.aliyuncs.com/comall/backend:base as builder
+FROM registry-vpc.cn-beijing.aliyuncs.com/comall/backend:base as builder
 
 FROM python:3.6
 
