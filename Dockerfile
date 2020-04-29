@@ -1,6 +1,12 @@
 FROM registry.cn-beijing.aliyuncs.com/comall/backend:base as builder
 
 FROM python:3.6
+
+# init
+RUN apt-get update && \
+    apt-get install -y nginx git && \
+    mkdir /run/nginx/
+
 #  front file
 COPY --from=builder /store/static.tar.gz /app/html/
 
@@ -14,13 +20,11 @@ COPY --from=builder /store/pipeline-distribution-tool.conf /etc/nginx/conf.d/
 COPY --from=builder /store/entrypoint.sh /
 
 RUN cd /app/html/ && tar xf static.tar.gz && rm -f static.tar.gz && \
-    cd /app/pipeline && tar xf python.tar.gz && rm -f python.tar.gz && \
-    apt-get update && \
-    apt-get install -y nginx git && \
-    mkdir /run/nginx/ && \
-    cd /app/pipeline/ && \
+    cd /app/pipeline && tar xf python.tar.gz && rm -f python.tar.gz 
+    
+RUN cd /app/pipeline/ && \
     pip3 install -r requirements.txt && \
-    RUN chmod +x /entrypoint.sh
+    chmod +x /entrypoint.sh
     
 WORKDIR /app
 
